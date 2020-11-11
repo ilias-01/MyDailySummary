@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Hello ActualteController!{% endblock %}
+
+{% block body %}
+    {% set items = rss.channel.item %} 
+    <div class="form-group ">
+        <input type="text" name="_search">
+        <input type="submit" class="btn btn-primary" value="Search">
+    </div>
+    
+    <pre>
+        {{ dump(rss.channel) }}
+    </pre>
+    <section>
+        <h3 class="text-center">Politique</h3>
+        {% for item in items %}
+            <h4> {{ item.title }}</h4>
+            <p> {{ item.description }}</p>
+            <p> {{ item.enclosure }}</p>
+        {% endfor %}
+    </section>
+    <section>
+        <h3 class="text-center">Sport</h3>
+        {% for item in items %}
+            <h4> {{ item.title }}</h4>
+            <p> {{ item.description }}</p>
+            <p> {{ item.guid }}</p>
+        {% endfor %}
+    </section>
+    <section>
+        <h3 class="text-center">Célébrité</h3>
+        {% for item in items %}
+            <h4> {{ item.title }}</h4>
+            <p> {{ item.description }}</p>
+            <p> {{ item.guid }}</p>
+        {% endfor %}
+    </section>
+    
+
+{% endblock %}
