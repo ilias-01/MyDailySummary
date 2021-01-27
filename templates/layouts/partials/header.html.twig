@@ -3,7 +3,8 @@
 <div id="preloader">
     <div id="loader"></div>
 </div>
-
+{% set currentPath = path(app.request.attributes.get('_route'),
+                       app.request.attributes.get('_route_params')) %}
 <!-- header
  ================================================== -->
 <header class="s-header">
@@ -45,25 +46,38 @@
 
         </nav> <!-- end header__nav-wrap -->
 
+    {% if currentPath is same as("/")  %}
         <a class="s-header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
-
         <div class="s-header__search">
 
             <form role="search" method="get" class="s-header__search-form" action="#">
                 <label>
                     <span class="hide-content">Search for:</span>
-                    <input type="search" class="s-header__search-field" placeholder="Type Your Keywords" value="" name="s" title="Search for:" autocomplete="off">
+                    {# <input type="search" class="s-header__search-field" placeholder="Type Your Keywords" value="" name="s" title="Search for:" autocomplete="off"> #}
+                                {{ form_start(form_search) }}
+									<div class="row d-flex justify-content-center">
+										<div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                {{ form_row(form_search.category) }}
+                                                </div>
+                                                <div class="col-md-9">
+                                                {{ form_row(form_search.title) }}
+                                                </div>
+                                            </div>
+										</div>
+									</div>
+								{{ form_end(form_search) }}
                 </label>
-                <input type="submit" class="s-header__search-submit" value="Search">
+                {# <input type="submit" class="s-header__search-submit" value="Search"> #}
             </form>
-
             <a href="#0" title="Close Search" class="s-header__overlay-close">Close</a>
 
         </div> <!-- end search wrap -->
-
         <a class="s-header__search-trigger" href="#">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 18a7.952 7.952 0 004.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0018 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path></svg>
         </a>
+    {% endif %}
 
     </div> <!-- end s-header__content -->
 
