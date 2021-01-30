@@ -47,6 +47,7 @@ class Article
      */
     private $link;
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,4 +124,5 @@ class Article
 
         return $this;
     }
+
 }

@@ -85,43 +85,119 @@
 
                     </div> <!-- end entry content -->
                 </div> <!-- end entry, featured grid -->
-                {% if rss_politique != null %}
-                    {% if rss_politique[0] is defined %}
+                {% if rss_politique != null or rss_election != null %}
+                    {% if rss_politique[0] is defined %}<!-- for the search result -->
                         {% set politique_items = rss_politique %}
-                    {% else %}
-                        {% set politique_items = rss_politique.channel.item %}
-                    {% endif %}
-                    {% for item in politique_items %}
-                        <article class="brick entry format-standard animate-this">
-                            {# <div class="entry__thumb">
-                                <a href="{{ item.link }}" class="thumb-link">
-                                    <img src="{{ asset('assets/images/thumbs/masonry/woodcraft-600.jpg') }}" 
-                                        srcset="{{ asset('assets/images/thumbs/masonry/woodcraft-600.jpg') }} 1x, {{ asset('assets/images/thumbs/masonry/woodcraft-1200.jpg') }} 2x" alt="">
-                                </a>
-                            </div> <!-- end entry__thumb --> #}
-                            <div class="entry__text">
-                                <div class="entry__header">
-            
-                                    <div class="entry__meta">
-                                        <span class="entry__cat-links">
-                                            {{ item.pubDate | date("d/m/Y") }}<br>
-                                            <a href="#">{{ item.category }}</a> 
-                                        </span>
+                        {% for item in politique_items %}
+                            <article class="brick entry format-standard animate-this">
+                                {# <div class="entry__thumb">
+                                    <a href="{{ item.link }}" class="thumb-link">
+                                        <img src="{{ asset('assets/images/thumbs/masonry/woodcraft-600.jpg') }}" 
+                                            srcset="{{ asset('assets/images/thumbs/masonry/woodcraft-600.jpg') }} 1x, {{ asset('assets/images/thumbs/masonry/woodcraft-1200.jpg') }} 2x" alt="">
+                                    </a>
+                                </div> <!-- end entry__thumb --> #}
+                                <div class="entry__text">
+                                    <div class="entry__header">
+                
+                                        <div class="entry__meta">
+                                            <span class="entry__cat-links">
+                                                {{ item.pubDate | date("d/m/Y") }}<br>
+                                                <a href="?article_search%5Bcategory%5D={{ item.category }}&article_search%5Btitle%5D=#">{{ item.category }}</a> 
+                                            </span>
+                                        </div>
+                
+                                        <h1 class="entry__title"><a href="{{ item.link }}">{{ item.title }}</a></h1>
+                                        
                                     </div>
-            
-                                    <h1 class="entry__title"><a href="{{ item.link }}">{{ item.title }}</a></h1>
-                                    
-                                </div>
-                                <div class="entry__excerpt">
-                                    <p>
-                                        {{ item.description }}
-                                    </p>
-                                </div>
-                            </div> <!-- end entry__text -->
-            
-                        </article> <!-- end entry -->
-                        
-                    {% endfor %}
+                                    <div class="entry__excerpt">
+                                        <p>
+                                            {{ item.description }}
+                                        </p>
+                                    </div>
+                                    <div class="text-right">
+                                        <a href="{{ path('add.actuality',{'id':item.id}) }}" class="js-add">
+                                            <small><span>ajouter au favoris<span></small>
+                                        </a>
+                                    </div>
+                                </div> <!-- end entry__text -->
+                
+                            </article> <!-- end entry -->
+                        {% endfor %}
+                    {% else %}
+                        <!-- LA UNE -->
+                        {% set politique_items = rss_politique.channel.item %}
+                        {% set election_items = rss_election.channel.item %}
+                        {% for item in politique_items|slice(0, 5) %}
+                            <article class="brick entry format-standard animate-this">
+                                {# <div class="entry__thumb">
+                                    <a href="{{ item.link }}" class="thumb-link">
+                                        <img src="{{ asset('assets/images/thumbs/masonry/woodcraft-600.jpg') }}" 
+                                            srcset="{{ asset('assets/images/thumbs/masonry/woodcraft-600.jpg') }} 1x, {{ asset('assets/images/thumbs/masonry/woodcraft-1200.jpg') }} 2x" alt="">
+                                    </a>
+                                </div> <!-- end entry__thumb --> #}
+                                <div class="entry__text">
+                                    <div class="entry__header">
+                
+                                        <div class="entry__meta">
+                                            <span class="entry__cat-links">
+                                                {{ item.pubDate | date("d/m/Y") }}<br>
+                                                <a href="?article_search%5Bcategory%5D={{ item.category }}&article_search%5Btitle%5D=#">{{ item.category }}</a> 
+                                            </span>
+                                        </div>
+                
+                                        <h1 class="entry__title"><a href="{{ item.link }}">{{ item.title }}</a></h1>
+                                        
+                                    </div>
+                                    <div class="entry__excerpt">
+                                        <p>
+                                            {{ item.description }}
+                                        </p>
+                                    </div>
+                                    {# <div class="text-right">
+                                        <a href="#">
+                                            <small>ajouter au favoris</small>
+                                        </a>
+                                    </div> #}
+                                </div> <!-- end entry__text -->
+
+                            </article> <!-- end entry -->
+                        {% endfor %}
+                        {% for item in election_items|slice(0, 5) %}
+                                <article class="brick entry format-standard animate-this">
+                                    {# <div class="entry__thumb">
+                                        <a href="{{ item.link }}" class="thumb-link">
+                                            <img src="{{ asset('assets/images/thumbs/masonry/woodcraft-600.jpg') }}" 
+                                                srcset="{{ asset('assets/images/thumbs/masonry/woodcraft-600.jpg') }} 1x, {{ asset('assets/images/thumbs/masonry/woodcraft-1200.jpg') }} 2x" alt="">
+                                        </a>
+                                    </div> <!-- end entry__thumb --> #}
+                                    <div class="entry__text">
+                                        <div class="entry__header">
+                    
+                                            <div class="entry__meta">
+                                                <span class="entry__cat-links">
+                                                    {{ item.pubDate | date("d/m/Y") }}<br>
+                                                    <a href="?article_search%5Bcategory%5D={{ item.category }}&article_search%5Btitle%5D=#">{{ item.category }}</a> 
+                                                </span>
+                                            </div>
+                    
+                                            <h1 class="entry__title"><a href="{{ item.link }}">{{ item.title }}</a></h1>
+                                            
+                                        </div>
+                                        <div class="entry__excerpt">
+                                            <p>
+                                                {{ item.description }}
+                                            </p>
+                                        </div>
+                                        {# <div class="text-right">
+                                            <a href="#">
+                                                <small>ajouter au favoris</small>
+                                            </a>
+                                        </div> #}
+                                    </div> <!-- end entry__text -->
+                    
+                                </article> <!-- end entry -->
+                        {% endfor %}
+                    {% endif %}
                 {% else %}
                     <p class="text-right">Pas d'articles disponible !<a href="/">Cliquer ici pour actualiser la page</a></p>
                 {% endif %}

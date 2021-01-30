@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use App\Entity\Favoris;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +22,34 @@ class ActualteController extends AbstractController
             'controller_name' => 'ActualteController',
             'rss' => $rss_politique
         ]);
+    }
+
+    /**
+     * @Route("/actuality/add/{id}", name="add.actuality")
+     */
+    public function addToFavoris(Article $article,EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        if(!$user) return $this->json([
+            'code' => 403,
+            'message' => "Unauthorized"
+        ],403);
+
+        if(!$article)return $this->json([
+            'code' => 404,
+            'message' => "Article non trouvé"
+        ],404);
+
+        $favoris =  new Favoris();
+        $favoris->setUser($user);
+        $favoris->setArticle($article);
+
+        $em->persist($favoris);
+        $em->flush();
+        return $this->json([
+            'code' => "200",
+            'message' => "L'article est bien ajouté aux favoris"
+        ],200);
     }
 
 

@@ -26,7 +26,8 @@ class ArticleSearchType extends AbstractType
                 'choices' => [
                     'Tout' => 'All',
                     'Politique' => 'Politique',
-                    'Eléction' => 'Eléction',
+                    'Élections' => 'Élections',
+                    'Municipales' => 'Municipales',
                     'Sport' => 'Sport',
                 ],
                 "label" => false,

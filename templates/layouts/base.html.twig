@@ -35,6 +35,30 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <script src="{{ asset("assets/js/plugins.js") }}"></script>
         <script src="{{ asset("assets/js/main.js") }}"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            function onClickBtnAdd(event) {
+                event.preventDefault();
+                const url = this.href;
+                const buttonText = this.querySelector('span');
+                axios.get(url).then(function(response){
+                    buttonText.textContent = "article ajouté à vos favoris";
+                }).catch(function(error) {
+                    if(error.response.status === 403){
+                        window.alert('Unauthorized action, please log in !')
+                    }else if(error.response.status === 404)
+                        {
+                            window.alert('Article not found')
+                        }
+                    else{
+                        window.alert('An error accured, please try later')
+                    }
+                });
+            }
+            document .querySelectorAll('a.js-add').forEach(function(link){
+                    link.addEventListener('click',onClickBtnAdd);
+                });    	 
+        </script>
     {% endblock %}
     </body>
 </html>
