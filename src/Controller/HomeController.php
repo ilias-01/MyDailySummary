@@ -33,7 +33,7 @@ class HomeController extends AbstractController
         $platform   = $connection->getDatabasePlatform();
         $connection->executeUpdate($platform->getTruncateTableSQL('article', true ));
         
-        //In case there is an error while loading the xml files
+        //In case of there is an error while loading the xml files
         try{
             $rss_politique = simplexml_load_file('https://www.lefigaro.fr/rss/figaro_politique.xml');
             $rss_election = simplexml_load_file('https://www.lefigaro.fr/rss/figaro_elections.xml');

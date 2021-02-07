@@ -22,18 +22,19 @@
             <h2 class="s-header__nav-heading h6">Site Navigation</h2>
 
             <ul class="s-header__nav">
-                <li class="current"><a href="{{ path('home') }}" title="">Accueil</a></li>
+                <li class="#"><a href="{{ path('home') }}" title="">Accueil</a></li>
                 <li class="has-children">
                     <a href="#0" title="">Categories</a>
                     <ul class="sub-menu">
-                        <li><a href="#">Articles de politiques</a></li>
+                        <li><a href="?article_search%5Bcategory%5D=Politique&article_search%5Btitle%5D=#">Articles de politiques</a></li>
                         <li><a href="#">Articles des éléctions</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ path('favoris') }}" title="">Favoris</a></li>
-                <li><a href="about.html" title="">About</a></li>
-                <li><a href="contact.html" title="">Contact</a></li>
+                
+                <li><a href="#" title="">About</a></li>
+                <li><a href="#" title="">Contact</a></li>
                 {% if app.user %}
+                <li><a href="{{ path('favoris') }}" title="">Favoris</a></li>
                 <li><a href="{{path('app_logout')}}" title="">logout</a></li>
                 {% else %}
                 <li><a href="{{path('app_register')}}" title="">Inscription</a></li>
