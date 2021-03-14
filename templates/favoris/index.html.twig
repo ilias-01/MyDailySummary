@@ -15,6 +15,7 @@
                                     <p class="card-text">
                                         {{ article.description }}
                                     </p>
+                                    <a href="{{ path('remove.actuality',{'id':article.id}) }}" class="js-remove"> supprimer </a>
                                 </div>
                             </div> 
                         {% endfor %} 

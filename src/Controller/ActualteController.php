@@ -52,5 +52,21 @@ class ActualteController extends AbstractController
         ],200);
     }
 
+    /**
+     * @Route("/actuality/remove/{id}", name="remove.actuality")
+     */
+    public function removeFromFavoris(Article $article,EntityManagerInterface $em): Response
+    {
+        $favRepo = $em->getRepository(Favoris::class);
+        $favoris = $favRepo->find($article);
+
+        $em->remove($favoris);
+        $em->flush();
+
+        return $this->json([
+            'code' => "200",
+            'message' => "L'article est bien supprimé des favoris"
+        ],200);
+    }
 
 }

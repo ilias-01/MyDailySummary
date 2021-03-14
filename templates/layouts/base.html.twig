@@ -37,6 +37,7 @@
         <script src="{{ asset("assets/js/main.js") }}"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
+        //ADD TO FAVORITE
             function onClickBtnAdd(event) {
                 event.preventDefault();
                 const url = this.href;
@@ -57,6 +58,21 @@
             }
             document .querySelectorAll('a.js-add').forEach(function(link){
                     link.addEventListener('click',onClickBtnAdd);
+                });
+
+            //REMOVE FROM FAVORITE
+            function onClickBtnRemove(event) {
+                event.preventDefault();
+                const url = this.href;
+                const favoris = this.parentElement.parentElement;
+                axios.get(url).then(function(response){
+                    favoris.remove();
+                }).catch(function(error) {
+                        window.alert('An error accured, please try later')
+                });
+            }
+            document .querySelectorAll('a.js-remove').forEach(function(link){
+                    link.addEventListener('click',onClickBtnRemove);
                 });    	 
         </script>
     {% endblock %}

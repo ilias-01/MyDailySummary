@@ -63,6 +63,7 @@ class HomeController extends AbstractController
         ]);
     }
 
+
     private function  putArticlesOnDB($rss)
     {
         //Array transform
